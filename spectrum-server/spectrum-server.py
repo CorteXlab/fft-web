@@ -1,34 +1,65 @@
+from gevent import spawn
+from gevent.event import Event
 from gevent.pywsgi import WSGIServer
 from geventwebsocket import WebSocketError
 from geventwebsocket.handler import WebSocketHandler
 from bottle import request, Bottle, abort
 from traceback import format_exc
 import gevent.socket as socket, struct, sys, json
+from pprint import pformat
 
 GRSF_SYNC = "\xac\xdd\xa4\xe2\xf2\x8c\x20\xfc"
 GRSF_SYNC_LENGTH = len(GRSF_SYNC)
 GRSF_HEADER_LENGTH = GRSF_SYNC_LENGTH + 1
 
-udpsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-udpsock.bind(("", 6663))
+class UdpSpectrumListener(object):
+
+    def __init__(self, port):
+        self._udpsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self._udpsock.bind(("", port))
+        self.recvd = Event()
+        self.last_recv = None
+        self.last_recv_counter = None
+        spawn(self._udp_fetch)
+
+    def _udp_fetch(self):
+        while True:
+            self.last_recv = self._udpsock.recv(32768)
+            if self.last_recv_counter == None:
+                self.last_recv_counter = 0
+            else:
+                self.last_recv_counter += 1
+            self.recvd.set()
+            self.recvd.clear()
+
+usl = UdpSpectrumListener(6663)
 
 app = Bottle()
+
+def request_id(request):
+    return "%s:%s" % (request.environ.get('REMOTE_ADDR'), request.environ.get('REMOTE_PORT'))
 
 @app.route('/spectrum')
 def handle_spectrum_ws():
     try:
-        print "handle_spectrum_ws start"
+        print request_id(request) + ': handle_spectrum_ws start'
         wsock = request.environ.get('wsgi.websocket')
         if not wsock:
-            abort(400, 'Expected WebSocket request.')
+            abort(400, request_id(request) + ': Expected WebSocket request.')
 
         workbuf = ""
+        udp_counter = None
         packet_length = -1
         seq_num = None
 
         while not wsock.closed:
             try:
-                workbuf += udpsock.recv(32768)
+                while True:
+                    usl.recvd.wait()
+                    if udp_counter == None or udp_counter < usl.last_recv_counter:
+                        udp_counter = usl.last_recv_counter
+                        workbuf += usl.last_recv
+                        break
 
                 next_packet = -1
                 if packet_length != -1:
@@ -55,7 +86,7 @@ def handle_spectrum_ws():
                         next_seq_num, = struct.unpack("B", next_seq_num_str)
                         if (seq_num != None and
                             (seq_num + 1) % 256 != next_seq_num):
-                            print >> sys.stderr, "seq_num = %i, next_seq_num = %i" % (
+                            print >> sys.stderr, request_id(request) + ": seq_num = %i, next_seq_num = %i" % (
                                 seq_num, next_seq_num)
                         seq_num = next_seq_num
                     workbuf = workbuf[next_packet:]
@@ -64,14 +95,14 @@ def handle_spectrum_ws():
                         wsock.send(payload, binary = True)
                         payload = ""
             except WebSocketError:
-                print "WebSocketError"
+                print request_id(request) + ": WebSocketError"
                 break
-        print "websocket closed"
+        print request_id(request) + ": websocket closed"
     except Exception, exc:
-        print >> sys.stderr, "exception occured in handle_spectrum_ws:\n%s" % (
+        print >> sys.stderr, request_id(request) + ": exception occured in handle_spectrum_ws:\n%s" % (
                 format_exc(),)
     finally:
-        print "handle_spectrum_ws end"
+        print request_id(request) + ": handle_spectrum_ws end"
 
 server = WSGIServer(("0.0.0.0", 8080), app,
                     handler_class=WebSocketHandler)
