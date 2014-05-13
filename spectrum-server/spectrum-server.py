@@ -1,7 +1,9 @@
-import socket, struct, sys, json
+from gevent.pywsgi import WSGIServer
+from geventwebsocket import WebSocketError
+from geventwebsocket.handler import WebSocketHandler
 from bottle import request, Bottle, abort
 from traceback import format_exc
-
+import gevent.socket as socket, struct, sys, json
 
 GRSF_SYNC = "\xac\xdd\xa4\xe2\xf2\x8c\x20\xfc"
 GRSF_SYNC_LENGTH = len(GRSF_SYNC)
@@ -62,16 +64,15 @@ def handle_spectrum_ws():
                         wsock.send(payload, binary = True)
                         payload = ""
             except WebSocketError:
+                print "WebSocketError"
                 break
+        print "websocket closed"
     except Exception, exc:
         print >> sys.stderr, "exception occured in handle_spectrum_ws:\n%s" % (
                 format_exc(),)
     finally:
         print "handle_spectrum_ws end"
 
-from gevent.pywsgi import WSGIServer
-from geventwebsocket import WebSocketError
-from geventwebsocket.handler import WebSocketHandler
 server = WSGIServer(("0.0.0.0", 8080), app,
                     handler_class=WebSocketHandler)
 server.serve_forever()
