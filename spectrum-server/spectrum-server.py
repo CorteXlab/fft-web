@@ -5,8 +5,8 @@ from geventwebsocket import WebSocketError
 from geventwebsocket.handler import WebSocketHandler
 from bottle import request, Bottle, abort
 from traceback import format_exc
-import gevent.socket as socket, struct, sys, json
-from pprint import pformat
+from gevent import socket
+import struct, sys
 
 GRSF_SYNC = "\xac\xdd\xa4\xe2\xf2\x8c\x20\xfc"
 GRSF_SYNC_LENGTH = len(GRSF_SYNC)
