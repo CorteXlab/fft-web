@@ -36,8 +36,7 @@ ws.onmessage = function(evt) {
             .attr("y", function(d, i) { return height - sy(d); })
             .attr("height", function(d, i) { return sy(d); } );
 
-        updt.enter().append("rect")
-            .attr("fill", "#ccc");
+        updt.enter().append("rect");
 
         updt.exit().remove();
     }

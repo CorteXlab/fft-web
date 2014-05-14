@@ -2,15 +2,22 @@
 <html>
 <head>
   <script src="lib/d3/d3.min.js"></script>
-  <style type="text/css">
-    .spectrum rect { fill: steelblue; }
-  </style>
 </head>
 
 <body>
   <h1>Spectrum Analyzer</h1>
   <div style="border-color: black; border-style: solid; width: 640px; height: 200px">
-    <svg class="spectrum" width="640" height="200"></svg>
+    <svg class="spectrum" width="640" height="200">
+      <defs>
+        <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="red"/>
+          <stop offset="100%" stop-color="black"/>
+        </linearGradient>
+        <style type="text/css"><![CDATA[
+          rect { fill: url(#gradient); }
+          ]]></style>
+      </defs>
+    </svg>
     <script src="js/spectrum.js"></script>
   </div>
 </body>
