@@ -11,7 +11,6 @@ function update_sx(size) {
 }
 update_sx(fft_size);
 
-
 var sy = d3.scale.pow()
     .exponent(4)
     .domain([0, 255])
@@ -32,13 +31,13 @@ ws.onmessage = function(evt) {
 
         var updt = chart.selectAll("rect")
             .data(spectrum)
+            .attr("x", function(d, i) { return sx(i); })
+            .attr("width", sx(1))
             .attr("y", function(d, i) { return height - sy(d); })
             .attr("height", function(d, i) { return sy(d); } );
 
         updt.enter().append("rect")
-            .attr("fill", "#ccc")
-            .attr("x", function(d, i) { return sx(i); })
-            .attr("width", sx(1));
+            .attr("fill", "#ccc");
 
         updt.exit().remove();
     }
