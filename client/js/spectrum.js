@@ -18,7 +18,7 @@ var sy = d3.scale.pow()
     .domain([0, 255])
     .rangeRound([0, height]);
 
-ws = new WebSocket("ws://" + location.host + ":8080/spectrum");
+ws = new WebSocket("ws://" + location.host + ":8080/fft/6663");
 ws.binaryType = "arraybuffer";
 ws.onopen = function() { console.log("spectrum websocket opened"); };
 ws.onclose = function() { console.log("spectrum websocket closed"); };

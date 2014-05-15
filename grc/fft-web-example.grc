@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Thu May 15 16:17:27 2014</timestamp>
+  <timestamp>Thu May 15 17:06:44 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -429,7 +429,7 @@
     </param>
     <param>
       <key>size</key>
-      <value>512</value>
+      <value>256</value>
     </param>
     <param>
       <key>samp_rate</key>

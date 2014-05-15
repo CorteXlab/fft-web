@@ -9,19 +9,16 @@ from gevent import socket
 import struct, sys, logging, logging.handlers
 
 logger = logging.getLogger("fft-server")
-logger.setLevel("WARN")
-#logger.addHandler(logging.StreamHandler(sys.stdout))
-handler = logging.handlers.SysLogHandler("/dev/log")
-handler.setFormatter(logging.Formatter('%(name)s/%(levelname)s: %(message)s'))
-logger.addHandler(handler)
+logger.setLevel("INFO")
 
 GRSF_SYNC = "\xac\xdd\xa4\xe2\xf2\x8c\x20\xfc"
 GRSF_SYNC_LENGTH = len(GRSF_SYNC)
 GRSF_HEADER_LENGTH = GRSF_SYNC_LENGTH + 1
 
-class UdpSpectrumReceiver(object):
+class UdpFftReceiver(object):
 
     def __init__(self, port):
+        logger.info("starting new fft receiver on port %i" % port)
         self._udpsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self._udpsock.bind(("", port))
         self._workbuf = ""
@@ -79,26 +76,25 @@ class UdpSpectrumReceiver(object):
                     self.new_fft_available.set()
                     self.new_fft_available.clear()
 
-udp_receiver = UdpSpectrumReceiver(6663)
+udp_receivers = {}
 
 app = Bottle()
 
 def request_id(request):
     return "%s:%s" % (request.environ.get('REMOTE_ADDR'), request.environ.get('REMOTE_PORT'))
 
-@app.route('/spectrum')
-def handle_spectrum_ws():
+@app.route('/fft/<port:int>')
+def handle_fft_ws(port):
     try:
         logger.info(request_id(request) + ': connection')
         wsock = request.environ.get('wsgi.websocket')
         if not wsock:
             abort(400, request_id(request) + ': Expected WebSocket request.')
+        if not udp_receivers.has_key(port):
+            udp_receivers[port] = UdpFftReceiver(port)
+        udp_receiver = udp_receivers[port]
 
-        workbuf = ""
         udp_counter = None
-        packet_length = -1
-        simple_framer_seq_num = None
-
         while not wsock.closed:
             try:
                 while True:
@@ -112,11 +108,34 @@ def handle_spectrum_ws():
         logger.info(request_id(request) + ": websocket closed")
     except Exception, exc:
         logger.error(request_id(request) +
-                     ": exception occured in handle_spectrum_ws:\n%s" % (
+                     ": exception occured in handle_fft_ws:\n%s" % (
                 format_exc(),))
     finally:
         logger.info(request_id(request) + ": end")
 
-server = WSGIServer(("0.0.0.0", 8080), app,
-                    handler_class=WebSocketHandler)
-server.serve_forever()
+if __name__ == '__main__':
+    from optparse import OptionParser
+    parser = OptionParser()
+    parser.add_option("-p",
+                      dest = "port",
+                      type = "int",
+                      default = 8080,
+                      help = "fft websocket port")
+    parser.add_option("-s",
+                      dest="syslog",
+                      action="store_true",
+                      default = False,
+                      help="log to syslog instead of stdout")
+    (options, args) = parser.parse_args()
+
+    if options.syslog:
+        handler = logging.handlers.SysLogHandler("/dev/log")
+        handler.setFormatter(logging.Formatter('%(name)s/%(levelname)s: %(message)s'))
+        logger.addHandler(handler)
+    else:
+        logger.addHandler(logging.StreamHandler(sys.stdout))
+
+    server = WSGIServer(("0.0.0.0", options.port), app,
+                        handler_class=WebSocketHandler)
+    logger.info("starting fft server listening on port %i" % options.port)
+    server.serve_forever()
