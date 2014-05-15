@@ -2,14 +2,16 @@ var chart = d3.select(".spectrum");
 var width = chart.attr("width");
 var height = chart.attr("height");
 
-var fft_size = 1;
 var sx;
+var current_size = -1;
 function update_sx(size) {
-    sx = d3.scale.linear()
-        .domain([0, size])
-        .rangeRound([0, width]);
+    if (size != current_size) {
+        sx = d3.scale.linear()
+            .domain([0, size])
+            .rangeRound([0, width]);
+        current_size = size;
+    }
 }
-update_sx(fft_size);
 
 var sy = d3.scale.pow()
     .exponent(4)
@@ -24,10 +26,7 @@ ws.onclose = function() { console.log("spectrum websocket closed"); };
 ws.onmessage = function(evt) {
     if (evt.data instanceof ArrayBuffer) {
         spectrum = new Uint8Array(evt.data);
-        if (spectrum.length != fft_size) {
-            fft_size = spectrum.length;
-            update_sx(fft_size);
-        }
+        update_sx(spectrum.length);
 
         var updt = chart.selectAll("rect")
             .data(spectrum)
