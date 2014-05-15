@@ -68,7 +68,7 @@ class UdpFftReceiver(object):
                     logger.debug("learned packet length = %i" % (self._packet_length,))
                 self._workbuf = self._workbuf[next_packet:]
                 if len(payload) > 0:
-                    self.last_fft_received = payload
+                    self.last_fft_received = payload[len(payload)/2:] + payload[:len(payload)/2]
                     if self.last_fft_received_count == None:
                         self.last_fft_received_count = 0
                     else:
