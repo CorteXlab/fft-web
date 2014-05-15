@@ -1,4 +1,4 @@
-var chart = d3.select(".spectrum");
+var chart = d3.select(".fft");
 var width = chart.attr("width");
 var height = chart.attr("height");
 
@@ -20,16 +20,16 @@ var sy = d3.scale.pow()
 
 ws = new WebSocket("ws://" + location.host + ":8080/fft/6663");
 ws.binaryType = "arraybuffer";
-ws.onopen = function() { console.log("spectrum websocket opened"); };
-ws.onclose = function() { console.log("spectrum websocket closed"); };
+ws.onopen = function() { console.log("fft websocket opened"); };
+ws.onclose = function() { console.log("fft websocket closed"); };
 
 ws.onmessage = function(evt) {
     if (evt.data instanceof ArrayBuffer) {
-        spectrum = new Uint8Array(evt.data);
-        update_sx(spectrum.length);
+        fft = new Uint8Array(evt.data);
+        update_sx(fft.length);
 
         var updt = chart.selectAll("rect")
-            .data(spectrum)
+            .data(fft)
             .attr("x", function(d, i) { return sx(i); })
             .attr("width", sx(1))
             .attr("y", function(d, i) { return height - sy(d); })
