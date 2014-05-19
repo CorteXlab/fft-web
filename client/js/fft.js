@@ -1,42 +1,42 @@
-var chart = d3.select(".fft");
-var width = chart.attr("width");
-var height = chart.attr("height");
-
-var sx;
-var current_size = -1;
-function update_sx(size) {
-    if (size != current_size) {
-        sx = d3.scale.linear()
-            .domain([0, size])
-            .rangeRound([0, width]);
-        current_size = size;
-    }
+function Fft(elem, host, port, udpport) {
+    this._host = host;
+    this._port = port;
+    this._udpport = udpport;
+    this._chart = d3.select(elem);
+    this._width = this._chart.attr("width");
+    this._height = this._chart.attr("height");
+    this._sx = null;
+    this._current_fft_size = -1;
+    this._sy = d3.scale.pow()
+        .exponent(4)
+        .domain([0, 255])
+        .rangeRound([0, this._height]);
+    this._fftline = d3.svg.line()
+        .x(function(d, i) { return this._sx(i); })
+        .y(function(d) { return this._height - this._sy(d); });
+    this._fftpath = this._chart.append("svg:path")
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", "1.5px");
+    this._ws = new WebSocket("ws://" + this._host + ":" + this._port + "/fft/" + this._udpport);
+    this._ws.binaryType = "arraybuffer";
+    this._ws.onopen = function() { console.log("fft websocket opened"); };
+    this._ws.onclose = function() { console.log("fft websocket closed"); };
+    var self = this;
+    this._ws.onmessage = function(evt) {
+        if (evt.data instanceof ArrayBuffer) {
+            fft = new Uint8Array(evt.data);
+            self._update_sx(fft.length);
+            self._fftpath.attr("d", self._fftline(fft));
+        }
+    };
 }
 
-var sy = d3.scale.pow()
-    .exponent(4)
-    .domain([0, 255])
-    .rangeRound([0, height]);
-
-ws = new WebSocket("ws://" + location.host + ":8080/fft/6663");
-ws.binaryType = "arraybuffer";
-ws.onopen = function() { console.log("fft websocket opened"); };
-ws.onclose = function() { console.log("fft websocket closed"); };
-
-ws.onmessage = function(evt) {
-    if (evt.data instanceof ArrayBuffer) {
-        fft = new Uint8Array(evt.data);
-        update_sx(fft.length);
-
-        var updt = chart.selectAll("rect")
-            .data(fft)
-            .attr("x", function(d, i) { return sx(i); })
-            .attr("width", sx(1))
-            .attr("y", function(d, i) { return height - sy(d); })
-            .attr("height", function(d, i) { return sy(d); } );
-
-        updt.enter().append("rect");
-
-        updt.exit().remove();
+Fft.prototype._update_sx = function(size) {
+    if (size != this._current_fft_size) {
+        this._sx = d3.scale.linear()
+            .domain([0, size])
+            .rangeRound([0, this._width]);
+        this._current_fft_size = size;
     }
-};
+}

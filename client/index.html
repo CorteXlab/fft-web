@@ -2,25 +2,23 @@
 <html>
 <head>
   <script src="lib/d3/d3.min.js"></script>
+  <script src="js/fft.js"></script>
 </head>
 
 <body>
-  <h1>FFT</h1>
+  <h1>FFTs</h1>
   <div style="border-color: black; border-style: solid; width: 640px; height: 200px">
-    <svg class="fft" width="640" height="200">
-      <defs>
-        <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stop-color="red"/>
-          <stop offset="20%" stop-color="steelblue"/>
-          <stop offset="100%" stop-color="steelblue"/>
-        </linearGradient>
-        <style type="text/css"><![CDATA[
-          rect { fill: url(#gradient); }
-          .rect2 { fill: steelblue; }
-          ]]></style>
-      </defs>
-    </svg>
-    <script src="js/fft.js"></script>
+    <svg id="fft1" width="640" height="200"/>
+    <script language="javascript" type="text/javascript">
+      new Fft("#fft1", "localhost", 8080, 6663);
+    </script>
+  </div>
+  <br/>
+  <div style="border-color: black; border-style: solid; width: 640px; height: 200px">
+    <svg id="fft2" width="640" height="200"/>
+    <script language="javascript" type="text/javascript">
+      new Fft("#fft2", "localhost", 8080, 6664);
+    </script>
   </div>
 </body>
 </html>
