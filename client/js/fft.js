@@ -2,9 +2,14 @@ function Fft(elem, host, port, udpport) {
     this._host = host;
     this._port = port;
     this._udpport = udpport;
-    this._chart = d3.select(elem);
-    this._width = this._chart.attr("width");
-    this._height = this._chart.attr("height");
+    this._elem = d3.select(elem);
+    this._width = $(elem).width();
+    this._height = $(elem).height();
+    console.log("width = " + this._width);
+    console.log("height = " + this._height);
+    this._chart = this._elem.append("svg")
+        .attr("width", this._width)
+        .attr("height", this._height);
     this._sx = null;
     this._current_fft_size = -1;
     this._sy = d3.scale.pow()
@@ -30,6 +35,7 @@ function Fft(elem, host, port, udpport) {
             self._fftpath.attr("d", self._fftline(fft));
         }
     };
+    return this;
 }
 
 Fft.prototype._update_sx = function(size) {
