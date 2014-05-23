@@ -4,20 +4,33 @@
   <script src="lib/d3/d3-3.4.8.min.js"></script>
   <script src="lib/jquery/jquery-2.1.1.min.js"></script>
   <script src="js/fft.js"></script>
+
+  <script type="text/javascript">
+    fft_index = 0;
+    function addfft(elem, host, port, udpport) {
+      fft_index++;
+      var fft_id = "fft" + fft_index;
+      fft_html = "<div id=\"" + fft_id + "\" style=\"border-color: black; border-style: solid; width: 640px; height: 200px\"></div>";
+      fft_code = "new Fft(\"#" + fft_id + "\", \"" + host + "\", " + port +", " + udpport + ");";
+      $(elem).append(fft_html);
+      eval(fft_code);
+      console.log("fft_html: " + fft_html);
+      console.log("fft_code: " + fft_code);
+    }
+  </script>
+
 </head>
 
 <body>
   <h1>FFTs</h1>
 
-  <div id="fft1" style="border-color: black; border-style: solid; width: 100%; height: 400px"></div>
-  <br/>
-  <div id="fft2" style="border-color: black; border-style: solid; width: 640px; height: 100px"></div>
+  <form>
+    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val())">New fft</button>
+    host:<input type="text" id="host" value="localhost"/>
+    port:<input type="text" id="port" value="8080"/>
+    UDP port:<input type="text" id="udpport" value="6663"/>
+  </form>
 
-  <script language="javascript" type="text/javascript">
-    new Fft("#fft1", "localhost", 8080, 6663);
-    new Fft("#fft2", "localhost", 8080, 6664);
-  </script>
-
-
+  <div id="ffts"></div>
 </body>
 </html>
