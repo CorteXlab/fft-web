@@ -5,8 +5,6 @@ function Fft(elem, host, port, udpport) {
     this._elem = d3.select(elem);
     this._width = $(elem).width();
     this._height = $(elem).height();
-    console.log("width = " + this._width);
-    console.log("height = " + this._height);
     this._chart = this._elem.append("svg")
         .attr("width", this._width)
         .attr("height", this._height);
