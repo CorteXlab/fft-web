@@ -6,14 +6,19 @@
   <script src="js/fft.js"></script>
 
   <script type="text/javascript">
-    fft_index = 0;
+    var fft_index = 0;
+    var ffts = [];
     function addfft(elem, host, port, udpport) {
       fft_index++;
       var fft_id = "fft" + fft_index;
-      fft_html = "<div id=\"" + fft_id + "\" style=\"border-color: black; border-style: solid; width: 640px; height: 200px\"></div>";
-      fft_code = "new Fft(\"#" + fft_id + "\", \"" + host + "\", " + port +", " + udpport + ");";
+      fft_html = "<div id=\"" + fft_id + "_container\">"
+               + "<div id=\"" + fft_id + "\" style=\"border-color: black; border-style: solid; width: 640px; height: 200px\"></div>"
+               + "<button type=\"button\" onclick=\"ffts["+ fft_index + "].stop(); $('#" + fft_id + "_container').remove();\">close</button>"
+               + "</div><br/>";
+      fft_code = "ffts[fft_index] = new Fft(\"#" + fft_id + "\", \"" + host + "\", " + port +", " + udpport + "); ffts[fft_index].start();";
       $(elem).append(fft_html);
       eval(fft_code);
+      console.log("ffts[fft_index] = " + ffts[fft_index]);
     }
   </script>
 
@@ -28,7 +33,8 @@
     port:<input type="text" id="port" value="8080"/>
     UDP port:<input type="text" id="udpport" value="6663"/>
   </form>
-
-  <div id="ffts"></div>
+  <script type="text/javascript">
+    $( document ).ready( function() { $('#host').val(location.host) });
+  </script>
 </body>
 </html>

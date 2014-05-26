@@ -21,6 +21,19 @@ function Fft(elem, host, port, udpport) {
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-width", "1.5px");
+    return this;
+}
+
+Fft.prototype._update_sx = function(size) {
+    if (size != this._current_fft_size) {
+        this._sx = d3.scale.linear()
+            .domain([0, size])
+            .rangeRound([0, this._width]);
+        this._current_fft_size = size;
+    }
+}
+
+Fft.prototype.start = function() {
     this._ws = new WebSocket("ws://" + this._host + ":" + this._port + "/fft/" + this._udpport);
     this._ws.binaryType = "arraybuffer";
     this._ws.onopen = function() { console.log("fft websocket opened"); };
@@ -33,14 +46,8 @@ function Fft(elem, host, port, udpport) {
             self._fftpath.attr("d", self._fftline(fft));
         }
     };
-    return this;
 }
 
-Fft.prototype._update_sx = function(size) {
-    if (size != this._current_fft_size) {
-        this._sx = d3.scale.linear()
-            .domain([0, size])
-            .rangeRound([0, this._width]);
-        this._current_fft_size = size;
-    }
+Fft.prototype.stop = function() {
+    this._ws.close();
 }
