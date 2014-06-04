@@ -18,7 +18,6 @@
       fft_code = "ffts[fft_index] = new Fft(\"#" + fft_id + "\", \"" + host + "\", " + port +", " + udpport + "); ffts[fft_index].start();";
       $(elem).append(fft_html);
       eval(fft_code);
-      console.log("ffts[fft_index] = " + ffts[fft_index]);
     }
   </script>
 
