@@ -58,7 +58,7 @@ Fft.prototype._update_sx = function(size) {
 }
 
 Fft.prototype.start = function() {
-    this._ws = new WebSocket("ws://" + this._host + ":" + this._port + "/fft/" + this._udpport);
+    this._ws = new WebSocket("ws://" + this._host + ":" + this._port + "/fftws/" + this._udpport);
     this._ws.binaryType = "arraybuffer";
     this._ws.onopen = function() { console.log("fft websocket opened"); };
     this._ws.onclose = function() { console.log("fft websocket closed"); };

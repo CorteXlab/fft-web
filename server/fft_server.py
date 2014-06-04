@@ -83,7 +83,7 @@ app = Bottle()
 def request_id(request):
     return "%s:%s" % (request.environ.get('REMOTE_ADDR'), request.environ.get('REMOTE_PORT'))
 
-@app.route('/fft/<port:int>')
+@app.route('/fftws/<port:int>')
 def handle_fft_ws(port):
     try:
         logger.info(request_id(request) + ': connection')
