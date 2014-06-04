@@ -119,7 +119,7 @@ if __name__ == '__main__':
     parser.add_option("-p",
                       dest = "port",
                       type = "int",
-                      default = 8080,
+                      default = 8180,
                       help = "fft websocket port")
     parser.add_option("-s",
                       dest="syslog",
