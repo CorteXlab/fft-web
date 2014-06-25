@@ -88,7 +88,6 @@ def request_id(request):
 
 @app.route('/fftws/<port:int>')
 def handle_fft_ws(port):
-    print >> sys.stderr, "mzlekfmzlekfmlzkefmlzkefmlzkefmlkzefmlkzmelfkz"
     try:
         logger.info(request_id(request) + ': connection')
         wsock = request.environ.get('wsgi.websocket')
