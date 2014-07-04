@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Wed May 14 16:32:35 2014</timestamp>
+  <timestamp>Fri Jul  4 10:10:15 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -142,7 +142,7 @@
     <key>parameter</key>
     <param>
       <key>id</key>
-      <value>frame_rate</value>
+      <value>fft_size</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -150,11 +150,11 @@
     </param>
     <param>
       <key>label</key>
-      <value>frame rate</value>
+      <value>fft size</value>
     </param>
     <param>
       <key>value</key>
-      <value>5</value>
+      <value>256</value>
     </param>
     <param>
       <key>type</key>
@@ -166,7 +166,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(437, 9)</value>
+      <value>(342, 10)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -189,11 +189,11 @@
     </param>
     <param>
       <key>sample_rate</key>
-      <value>samp_rate</value>
+      <value>sample_rate</value>
     </param>
     <param>
       <key>fft_size</key>
-      <value>size</value>
+      <value>fft_size</value>
     </param>
     <param>
       <key>ref_scale</key>
@@ -248,7 +248,7 @@
     </param>
     <param>
       <key>num_items</key>
-      <value>size</value>
+      <value>fft_size</value>
     </param>
     <param>
       <key>vlen</key>
@@ -287,7 +287,7 @@
     </param>
     <param>
       <key>payload_bytesize</key>
-      <value>size</value>
+      <value>fft_size</value>
     </param>
     <param>
       <key>affinity</key>
@@ -311,111 +311,6 @@
     </param>
   </block>
   <block>
-    <key>parameter</key>
-    <param>
-      <key>id</key>
-      <value>size</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>fft size</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>256</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(342, 10)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>fft sample rate</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>1e4</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>eng_float</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(207, 11)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>id</key>
-      <value>port</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>port</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>6663</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(659, 9)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_udp_sink</key>
     <param>
       <key>id</key>
@@ -431,7 +326,7 @@
     </param>
     <param>
       <key>ipaddr</key>
-      <value>ip_addr</value>
+      <value>ip_address</value>
     </param>
     <param>
       <key>port</key>
@@ -466,7 +361,77 @@
     <key>parameter</key>
     <param>
       <key>id</key>
-      <value>ip_addr</value>
+      <value>sample_rate</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>sample rate</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>1e4</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>eng_float</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(230, 11)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>id</key>
+      <value>frame_rate</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>frame rate</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>5</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>intx</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(428, 10)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>id</key>
+      <value>ip_address</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -478,7 +443,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>"127.0.0.1"</value>
+      <value>"srvwww.cortexlab.fr"</value>
     </param>
     <param>
       <key>type</key>
@@ -490,7 +455,42 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(550, 7)</value>
+      <value>(535, 10)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>id</key>
+      <value>port</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>port</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>6663</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>intx</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(688, 10)</value>
     </param>
     <param>
       <key>_rotation</key>
