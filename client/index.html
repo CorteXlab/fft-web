@@ -13,7 +13,8 @@
       var fft_id = "fft" + fft_index;
       fft_html = "<div id=\"" + fft_id + "_container\">"
                + "<div id=\"" + fft_id + "\" style=\"border-color: black; border-style: solid; width: 640px; height: 200px\"></div>"
-               + "<button type=\"button\" onclick=\"ffts["+ fft_index + "].stop(); $('#" + fft_id + "_container').remove();\">close</button><br/>"
+               + host + ":" + port + " listening to FFT data on UDP port " + udpport
+               + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].stop(); $('#" + fft_id + "_container').remove();\">close</button><br/>"
                + "</div>";
       fft_code = "ffts[fft_index] = new Fft(\"#" + fft_id + "\", \"" + host + "\", " + port +", " + udpport + "); ffts[fft_index].start();";
       $(elem).append(fft_html);
