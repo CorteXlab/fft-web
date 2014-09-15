@@ -8,11 +8,11 @@
   <script type="text/javascript">
     var fft_index = 0;
     var ffts = [];
-    function addfft(elem, host, port, udpport) {
+    function addfft(elem, host, port, udpport, width, height) {
       fft_index++;
       var fft_id = "fft" + fft_index;
       fft_html = "<div id=\"" + fft_id + "_container\">"
-               + "<div id=\"" + fft_id + "\" style=\"border-color: black; border-style: solid; width: 640px; height: 200px\"></div>"
+               + "<div id=\"" + fft_id + "\" style=\"border-color: black; border-style: solid; width: " + width + "px; height: " + height + "px\"></div>"
                + host + ":" + port + " listening to FFT data on UDP port " + udpport
                + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].stop(); $('#" + fft_id + "_container').remove();\">close</button><br/>"
                + "</div>";
@@ -28,10 +28,12 @@
   <h1>FFTs</h1>
 
   <form>
-    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val())">New fft</button>
+    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val(), $('#fftwidth').val(), $('#fftheight').val())">New fft</button>
     host:<input type="text" id="host" value="localhost"/>
     port:<input type="text" id="port" value="80"/>
     UDP port:<input type="text" id="udpport" value="6663"/>
+    width:<input type="text" id="fftwidth" value="640"/>
+    height:<input type="text" id="fftheight" value="200"/>
   </form>
   <script type="text/javascript">
     $( document ).ready( function() { $('#host').val(location.host) });
