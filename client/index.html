@@ -11,9 +11,9 @@
     function addfft(elem, host, port, udpport, width, height) {
       fft_index++;
       var fft_id = "fft" + fft_index;
-      fft_html = "<div id=\"" + fft_id + "_container\">"
+      fft_html = "<div id=\"" + fft_id + "_container\" style=\"float: left\">"
                + "<div id=\"" + fft_id + "\" style=\"border-color: black; border-style: solid; width: " + width + "px; height: " + height + "px\"></div>"
-               + host + ":" + port + " listening to FFT data on UDP port " + udpport
+               + "<span title=\"" +host + ":" + port + " listening to FFT data on UDP port " + udpport + "\">" + udpport + "</span>"
                + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].stop(); $('#" + fft_id + "_container').remove();\">close</button><br/>"
                + "</div>";
       fft_code = "ffts[fft_index] = new Fft(\"#" + fft_id + "\", \"" + host + "\", " + port +", " + udpport + "); ffts[fft_index].start();";
