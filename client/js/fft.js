@@ -1,7 +1,8 @@
-function Fft(elem, host, port, udpport) {
+function Fft(elem, host, port, udpport, rearrange_halves) {
     this._host = host;
     this._port = port;
     this._udpport = udpport;
+    this._rearrange_halves = rearrange_halves;
     this._elem = d3.select(elem);
     this._total_width = $(elem).width();
     this._total_height = $(elem).height();
@@ -56,6 +57,14 @@ Fft.prototype._update_sx = function(size) {
     }
 }
 
+function get_rearranged_fft(fft) {
+    var rearranged = new Int8Array(fft.length);
+    middle = Math.floor(fft.length / 2);
+    rearranged.set(fft.subarray(middle, fft.length), 0);
+    rearranged.set(fft.subarray(0, middle), middle);
+    return rearranged;
+}
+
 Fft.prototype.start = function() {
     this._ws = new WebSocket("ws://" + this._host + ":" + this._port + "/fftws/" + this._udpport);
     this._ws.binaryType = "arraybuffer";
@@ -65,6 +74,9 @@ Fft.prototype.start = function() {
     this._ws.onmessage = function(evt) {
         if (evt.data instanceof ArrayBuffer) {
             fft = new Int8Array(evt.data);
+            if (self._rearrange_halves) {
+                fft = get_rearranged_fft(fft);
+            }
             self._update_sx(fft.length);
             self._fftpath.attr("d", self._fftline(fft));
         }
