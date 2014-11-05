@@ -21,7 +21,8 @@ GRSF_HEADER_LENGTH = GRSF_SYNC_LENGTH + 1
 class UdpFftReceiver(object):
 
     def __init__(self, port):
-        logger.info("starting new fft receiver on port %i" % port)
+        self._port = port
+        logger.info("starting new fft receiver on port %i" % self._port)
         self._udpsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self._udpsock.bind(("", port))
         self._workbuf = ""
@@ -43,15 +44,15 @@ class UdpFftReceiver(object):
                             :self._packet_length - GRSF_HEADER_LENGTH + GRSF_SYNC_LENGTH]
                         == GRSF_SYNC):
                         next_packet = self._packet_length
-                        logger.debug("header found where expected, packet_length = %i" % (self._packet_length,))
+                        logger.debug("%i: header found where expected, packet_length = %i" % (self._port, self._packet_length,))
                     else:
                         self._packet_length = -1
-                        logger.debug("header NOT found where expected -> will have to relearn packet length")
+                        logger.debug("%i: header NOT found where expected -> will have to relearn packet length" % (self._port,))
                 else:
                     continue
             if self._packet_length == -1:
                 next_packet = self._workbuf.find(GRSF_SYNC) + GRSF_HEADER_LENGTH
-                logger.debug("found header at %i" % (next_packet,))
+                logger.debug("%i: found header at %i" % (self._port, next_packet))
             if next_packet != -1:
                 payload = ""
                 if self._packet_length != -1:
@@ -63,12 +64,12 @@ class UdpFftReceiver(object):
                     next_simple_framer_seq_num, = struct.unpack("B", next_simple_framer_seq_num_str)
                     if (self._simple_framer_seq_num != None and
                         (self._simple_framer_seq_num + 1) % 256 != next_simple_framer_seq_num):
-                        logger.info("simple_framer_seq_num = %i, next_simple_framer_seq_num = %i" % (
-                            self._simple_framer_seq_num, next_simple_framer_seq_num))
+                        logger.info("%i: simple_framer_seq_num = %i, next_simple_framer_seq_num = %i" % (
+                            self._port, self._simple_framer_seq_num, next_simple_framer_seq_num))
                     self._simple_framer_seq_num = next_simple_framer_seq_num
                 else:
                     self._packet_length = next_packet
-                    logger.debug("learned packet length = %i" % (self._packet_length,))
+                    logger.debug("%i: learned packet length = %i" % (self._port, self._packet_length,))
                 self._workbuf = self._workbuf[next_packet:]
                 if len(payload) > 0:
                     self.last_fft_received = payload[len(payload)/2:] + payload[:len(payload)/2]
