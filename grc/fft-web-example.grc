@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='ASCII'?>
+<?grc format='1' created='3.7.5'?>
 <flow_graph>
-  <timestamp>Wed Jun  4 10:22:39 2014</timestamp>
+  <timestamp>Wed Nov  5 17:21:55 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -52,8 +53,93 @@
       <value></value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
-      <value>(10, 10)</value>
+      <value>(9, 10)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>a</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>-100</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(287, 15)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>size</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>1024</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(460, 16)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>b</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0.0</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(382, 15)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -75,6 +161,10 @@
       <value>32000</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(172, 10)</value>
     </param>
@@ -84,61 +174,26 @@
     </param>
   </block>
   <block>
-    <key>fft_web</key>
+    <key>analog_const_source_x</key>
     <param>
       <key>id</key>
-      <value>fft_web_1</value>
+      <value>analog_const_source_x_0</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
-      <key>frame_rate</key>
-      <value>5</value>
+      <key>type</key>
+      <value>complex</value>
     </param>
     <param>
-      <key>size</key>
-      <value>1024</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>1e4</value>
-    </param>
-    <param>
-      <key>port</key>
-      <value>6664</value>
-    </param>
-    <param>
-      <key>ip_addr</key>
-      <value>"127.0.0.1"</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(564, 335)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
+      <key>const</key>
       <value>0</value>
     </param>
-  </block>
-  <block>
-    <key>blocks_float_to_complex</key>
     <param>
-      <key>id</key>
-      <value>blocks_float_to_complex_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -154,7 +209,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 401)</value>
+      <value>(173, 487)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -162,30 +217,34 @@
     </param>
   </block>
   <block>
-    <key>audio_source</key>
+    <key>analog_noise_source_x</key>
     <param>
       <key>id</key>
-      <value>audio_source_0</value>
+      <value>analog_noise_source_x_1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
+      <key>type</key>
+      <value>complex</value>
     </param>
     <param>
-      <key>device_name</key>
+      <key>noise_type</key>
+      <value>analog.GR_GAUSSIAN</value>
+    </param>
+    <param>
+      <key>amp</key>
+      <value>1000</value>
+    </param>
+    <param>
+      <key>seed</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>alias</key>
       <value></value>
-    </param>
-    <param>
-      <key>ok_to_block</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>num_outputs</key>
-      <value>1</value>
     </param>
     <param>
       <key>affinity</key>
@@ -201,7 +260,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(29, 388)</value>
+      <value>(168, 533)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -209,30 +268,42 @@
     </param>
   </block>
   <block>
-    <key>audio_source</key>
+    <key>analog_sig_source_x</key>
     <param>
       <key>id</key>
-      <value>audio_source_1</value>
+      <value>analog_sig_source_x_0</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>False</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
     </param>
     <param>
       <key>samp_rate</key>
       <value>samp_rate</value>
     </param>
     <param>
-      <key>device_name</key>
-      <value></value>
+      <key>waveform</key>
+      <value>analog.GR_SIN_WAVE</value>
     </param>
     <param>
-      <key>ok_to_block</key>
-      <value>True</value>
+      <key>freq</key>
+      <value>5000</value>
     </param>
     <param>
-      <key>num_outputs</key>
+      <key>amp</key>
       <value>1</value>
+    </param>
+    <param>
+      <key>offset</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -248,7 +319,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(28, 437)</value>
+      <value>(184, 384)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -288,6 +359,10 @@
     <param>
       <key>offset</key>
       <value>0</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -337,6 +412,10 @@
       <value>0</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -380,6 +459,10 @@
       <value>1</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -401,132 +484,101 @@
     </param>
   </block>
   <block>
-    <key>blocks_add_xx</key>
+    <key>audio_source</key>
     <param>
       <key>id</key>
-      <value>blocks_add_xx_0</value>
+      <value>audio_source_0</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(255, 142)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_throttle</key>
-    <param>
-      <key>id</key>
-      <value>blocks_throttle_0_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>samples_per_second</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>ignoretag</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(376, 147)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>fft_web</key>
-    <param>
-      <key>id</key>
-      <value>fft_web_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>frame_rate</key>
-      <value>5</value>
-    </param>
-    <param>
-      <key>size</key>
-      <value>256</value>
     </param>
     <param>
       <key>samp_rate</key>
-      <value>1e4</value>
+      <value>samp_rate</value>
     </param>
     <param>
-      <key>port</key>
-      <value>6663</value>
+      <key>device_name</key>
+      <value></value>
     </param>
     <param>
-      <key>ip_addr</key>
-      <value>"127.0.0.1"</value>
+      <key>ok_to_block</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>num_outputs</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
       <value></value>
     </param>
     <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
       <key>_coordinate</key>
-      <value>(650, 41)</value>
+      <value>(29, 620)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>audio_source</key>
+    <param>
+      <key>id</key>
+      <value>audio_source_1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>device_name</key>
+      <value></value>
+    </param>
+    <param>
+      <key>ok_to_block</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>num_outputs</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(28, 669)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -760,6 +812,10 @@
       <value>0</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -773,11 +829,458 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(171, 508)</value>
+      <value>(214, 779)</value>
     </param>
     <param>
       <key>_rotation</key>
       <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_file_sink</key>
+    <param>
+      <key>id</key>
+      <value>blocks_file_sink_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>file</key>
+      <value>/home/mimbert/work/cortexlab/fft-web/scaled-log-power-fft-output.bin</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>unbuffered</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>append</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(927, 363)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_multiply_const_vxx</key>
+    <param>
+      <key>id</key>
+      <value>blocks_multiply_const_vxx_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>const</key>
+      <value>-255.0/(a-b)</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(926, 198)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_add_const_vxx</key>
+    <param>
+      <key>id</key>
+      <value>blocks_add_const_vxx_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>const</key>
+      <value>(128.0*b + 127.0*a)/(a-b)</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(928, 274)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_file_sink</key>
+    <param>
+      <key>id</key>
+      <value>blocks_file_sink_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>file</key>
+      <value>/home/mimbert/work/cortexlab/fft-web/raw-log-power-fft-output.bin</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>unbuffered</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>append</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(921, 16)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_file_sink</key>
+    <param>
+      <key>id</key>
+      <value>blocks_file_sink_0_1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>file</key>
+      <value>/home/mimbert/work/cortexlab/fft-web/converted-scaled-log-power-fft-output.bin</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>unbuffered</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>append</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1137, 367)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_float_to_char</key>
+    <param>
+      <key>id</key>
+      <value>blocks_float_to_char_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>scale</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1109, 274)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_vector_to_stream</key>
+    <param>
+      <key>id</key>
+      <value>blocks_vector_to_stream_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>num_items</key>
+      <value>256</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(924, 120)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>logpwrfft_x</key>
+    <param>
+      <key>id</key>
+      <value>logpwrfft_x_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>sample_rate</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>fft_size</key>
+      <value>256</value>
+    </param>
+    <param>
+      <key>ref_scale</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>frame_rate</key>
+      <value>5</value>
+    </param>
+    <param>
+      <key>average</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>avg_alpha</key>
+      <value>1.0</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(650, 322)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>fft_web_debug</key>
+    <param>
+      <key>id</key>
+      <value>fft_web_debug_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(819, 540)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>fft_size</key>
+      <value>size</value>
+    </param>
+    <param>
+      <key>sample_rate</key>
+      <value>1e4</value>
+    </param>
+    <param>
+      <key>frame_rate</key>
+      <value>5</value>
+    </param>
+    <param>
+      <key>port</key>
+      <value>6664</value>
+    </param>
+    <param>
+      <key>ip_address</key>
+      <value>"localhost"</value>
+    </param>
+    <param>
+      <key>debug_file</key>
+      <value>"/home/mimbert/work/cortexlab/fft-web/fft_output_2"</value>
+    </param>
+    <param>
+      <key>a</key>
+      <value>a</value>
+    </param>
+    <param>
+      <key>b</key>
+      <value>b</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
     </param>
   </block>
   <block>
@@ -863,12 +1366,16 @@
       <value>None</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(564, 441)</value>
+      <value>(564, 744)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -958,6 +1465,10 @@
       <value>None</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -970,6 +1481,348 @@
       <value>0</value>
     </param>
   </block>
+  <block>
+    <key>blocks_add_xx</key>
+    <param>
+      <key>id</key>
+      <value>blocks_add_xx_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>num_inputs</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(255, 142)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>fft_web_debug</key>
+    <param>
+      <key>id</key>
+      <value>fft_web_debug_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(649, 452)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>fft_size</key>
+      <value>size</value>
+    </param>
+    <param>
+      <key>sample_rate</key>
+      <value>1e4</value>
+    </param>
+    <param>
+      <key>frame_rate</key>
+      <value>5</value>
+    </param>
+    <param>
+      <key>port</key>
+      <value>6663</value>
+    </param>
+    <param>
+      <key>ip_address</key>
+      <value>"localhost"</value>
+    </param>
+    <param>
+      <key>debug_file</key>
+      <value>"/home/mimbert/work/cortexlab/fft-web/fft_output_1"</value>
+    </param>
+    <param>
+      <key>a</key>
+      <value>a</value>
+    </param>
+    <param>
+      <key>b</key>
+      <value>b</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_throttle</key>
+    <param>
+      <key>id</key>
+      <value>blocks_throttle_0_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>samples_per_second</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>ignoretag</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(376, 308)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>fft_web</key>
+    <param>
+      <key>id</key>
+      <value>fft_web_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>fft_size</key>
+      <value>256</value>
+    </param>
+    <param>
+      <key>power_max</key>
+      <value>0.0</value>
+    </param>
+    <param>
+      <key>power_min</key>
+      <value>-100.0</value>
+    </param>
+    <param>
+      <key>port</key>
+      <value>7000</value>
+    </param>
+    <param>
+      <key>frame_rate</key>
+      <value>5</value>
+    </param>
+    <param>
+      <key>sample_rate</key>
+      <value>1e4</value>
+    </param>
+    <param>
+      <key>ip_address</key>
+      <value>"gw.cortexlab.fr"</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(464, 98)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_float_to_complex</key>
+    <param>
+      <key>id</key>
+      <value>blocks_float_to_complex_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(248, 633)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>fft_web</key>
+    <param>
+      <key>id</key>
+      <value>fft_web_1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>fft_size</key>
+      <value>256</value>
+    </param>
+    <param>
+      <key>power_max</key>
+      <value>0.0</value>
+    </param>
+    <param>
+      <key>power_min</key>
+      <value>-100.0</value>
+    </param>
+    <param>
+      <key>port</key>
+      <value>7001</value>
+    </param>
+    <param>
+      <key>frame_rate</key>
+      <value>5</value>
+    </param>
+    <param>
+      <key>sample_rate</key>
+      <value>1e4</value>
+    </param>
+    <param>
+      <key>ip_address</key>
+      <value>"gw.cortexlab.fr"</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(824, 610)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <connection>
+    <source_block_id>blocks_throttle_0_0</source_block_id>
+    <sink_block_id>logpwrfft_x_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_add_xx_0</source_block_id>
+    <sink_block_id>blocks_throttle_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_throttle_0_0</source_block_id>
+    <sink_block_id>wxgui_fftsink2_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>analog_sig_source_x_0</source_block_id>
+    <sink_block_id>blocks_throttle_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>analog_const_source_x_0</source_block_id>
+    <sink_block_id>blocks_throttle_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>analog_noise_source_x_1</source_block_id>
+    <sink_block_id>blocks_throttle_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
   <connection>
     <source_block_id>analog_sig_source_x_1</source_block_id>
     <sink_block_id>blocks_add_xx_0</sink_block_id>
@@ -1001,14 +1854,68 @@
     <sink_key>1</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_throttle_0_0</source_block_id>
-    <sink_block_id>wxgui_fftsink2_0</sink_block_id>
+    <source_block_id>rtlsdr_source_0</source_block_id>
+    <sink_block_id>wxgui_fftsink2_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_add_xx_0</source_block_id>
-    <sink_block_id>blocks_throttle_0_0</sink_block_id>
+    <source_block_id>blocks_float_to_complex_0</source_block_id>
+    <sink_block_id>wxgui_fftsink2_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_throttle_0_0</source_block_id>
+    <sink_block_id>fft_web_debug_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_float_to_char_0</source_block_id>
+    <sink_block_id>blocks_file_sink_0_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_add_const_vxx_0</source_block_id>
+    <sink_block_id>blocks_float_to_char_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_vector_to_stream_0</source_block_id>
+    <sink_block_id>blocks_file_sink_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_vector_to_stream_0</source_block_id>
+    <sink_block_id>blocks_multiply_const_vxx_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>logpwrfft_x_0</source_block_id>
+    <sink_block_id>blocks_vector_to_stream_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_add_const_vxx_0</source_block_id>
+    <sink_block_id>blocks_file_sink_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_multiply_const_vxx_0_0</source_block_id>
+    <sink_block_id>blocks_add_const_vxx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_float_to_complex_0</source_block_id>
+    <sink_block_id>fft_web_debug_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1019,26 +1926,8 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>rtlsdr_source_0</source_block_id>
-    <sink_block_id>wxgui_fftsink2_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>rtlsdr_source_0</source_block_id>
-    <sink_block_id>fft_web_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_float_to_complex_0</source_block_id>
     <sink_block_id>fft_web_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_float_to_complex_0</source_block_id>
-    <sink_block_id>wxgui_fftsink2_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

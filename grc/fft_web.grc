@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Mon Aug 11 15:49:51 2014</timestamp>
+  <timestamp>Mon Aug 11 17:22:40 2014</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -52,6 +52,10 @@
       <value></value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(10, 10)</value>
     </param>
@@ -84,6 +88,10 @@
     </param>
     <param>
       <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>alias</key>
       <value></value>
     </param>
     <param>
@@ -122,6 +130,10 @@
       <value></value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(836, 10)</value>
     </param>
@@ -154,6 +166,10 @@
     </param>
     <param>
       <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>alias</key>
       <value></value>
     </param>
     <param>
@@ -192,43 +208,12 @@
       <value></value>
     </param>
     <param>
-      <key>_coordinate</key>
-      <value>(642, 10)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>id</key>
-      <value>ip_address</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>ip address</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>"srvwww.cortexlab.fr"</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>string</value>
-    </param>
-    <param>
-      <key>short_id</key>
+      <key>alias</key>
       <value></value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(488, 10)</value>
+      <value>(642, 10)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -259,6 +244,10 @@
     </param>
     <param>
       <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>alias</key>
       <value></value>
     </param>
     <param>
@@ -297,6 +286,10 @@
       <value></value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>_coordinate</key>
       <value>(182, 10)</value>
     </param>
@@ -318,6 +311,10 @@
     <param>
       <key>payload_bytesize</key>
       <value>fft_size</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -357,6 +354,10 @@
     <param>
       <key>scale</key>
       <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -402,6 +403,10 @@
       <value>1</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -443,6 +448,10 @@
     <param>
       <key>vlen</key>
       <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -504,6 +513,10 @@
       <value>1.0</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -518,53 +531,6 @@
     <param>
       <key>_coordinate</key>
       <value>(111, 137)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_udp_sink</key>
-    <param>
-      <key>id</key>
-      <value>blocks_udp_sink_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>ipaddr</key>
-      <value>ip_address</value>
-    </param>
-    <param>
-      <key>port</key>
-      <value>port</value>
-    </param>
-    <param>
-      <key>psize</key>
-      <value>1472</value>
-    </param>
-    <param>
-      <key>eof</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(534, 238)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -633,6 +599,10 @@
       <value>1</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -647,6 +617,96 @@
     <param>
       <key>_coordinate</key>
       <value>(518, 133)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>id</key>
+      <value>ip_address</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>ip address</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>"srvwww.cortexlab.fr"</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>string</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(488, 10)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_udp_sink</key>
+    <param>
+      <key>id</key>
+      <value>blocks_udp_sink_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>ipaddr</key>
+      <value>ip_address</value>
+    </param>
+    <param>
+      <key>port</key>
+      <value>port</value>
+    </param>
+    <param>
+      <key>psize</key>
+      <value>1472</value>
+    </param>
+    <param>
+      <key>eof</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(534, 238)</value>
     </param>
     <param>
       <key>_rotation</key>
