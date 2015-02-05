@@ -8,7 +8,7 @@
   <script type="text/javascript">
     var fft_index = 0;
     var ffts = [];
-    function addfft(elem, host, port, udpport, width, height, rearrange) {
+    function addfft(elem, host, port, udpport, width, height, rearrange, meanwindow) {
       fft_index++;
       var fft_id = "fft" + fft_index;
       fft_html = "<div id=\"" + fft_id + "_container\" style=\"float: left\">"
@@ -16,7 +16,7 @@
                + "<span title=\"" +host + ":" + port + " listening to FFT data on UDP port " + udpport + "\">" + udpport + "</span>"
                + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].stop(); $('#" + fft_id + "_container').remove();\">close</button><br/>"
                + "</div>";
-      fft_code = "ffts[fft_index] = new Fft(\"#" + fft_id + "\", \"" + host + "\", " + port +", " + udpport + ", " + rearrange + "); ffts[fft_index].start();";
+      fft_code = "ffts[fft_index] = new Fft(\"#" + fft_id + "\", \"" + host + "\", " + port +", " + udpport + ", " + rearrange + ", " + meanwindow + "); ffts[fft_index].start();";
       $(elem).append(fft_html);
       eval(fft_code);
     }
@@ -28,13 +28,14 @@
   <h1>FFTs</h1>
 
   <form>
-    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val(), $('#fftwidth').val(), $('#fftheight').val(), $('#rearrange').is(':checked')) ; $('#udpport').val((parseInt($('#udpport').val())+1).toString())">New fft</button>
+    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val(), $('#fftwidth').val(), $('#fftheight').val(), $('#rearrange').is(':checked'), $('#meanwindow').val()) ; $('#udpport').val((parseInt($('#udpport').val())+1).toString())">New fft</button>
     host:<input type="text" id="host" value="localhost"/>
     port:<input type="text" id="port" value="80"/>
     UDP port:<input type="text" id="udpport" value="6663"/>
     width:<input type="text" id="fftwidth" value="640"/>
     height:<input type="text" id="fftheight" value="200"/>
     rearrange halves:<input type="checkbox" id="rearrange" checked="true"/>
+    mean window:<input type="text" id="meanwindow" value="1"/>
   </form>
   <script type="text/javascript">
     $( document ).ready( function() { $('#host').val(location.host) });

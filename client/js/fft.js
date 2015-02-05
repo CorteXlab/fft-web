@@ -1,8 +1,10 @@
-function Fft(elem, host, port, udpport, rearrange_halves) {
+function Fft(elem, host, port, udpport, rearrange_halves, mean_window_size) {
     this._host = host;
     this._port = port;
     this._udpport = udpport;
     this._rearrange_halves = rearrange_halves;
+    this._mean_window_size = mean_window_size;
+    this._mean_window = [];
     this._elem = d3.select(elem);
     this._total_width = $(elem).width();
     this._total_height = $(elem).height();
@@ -42,6 +44,31 @@ function Fft(elem, host, port, udpport, rearrange_halves) {
     return this;
 }
 
+Fft.prototype._push_data = function(data) {
+    this._mean_window.push(data);
+    while (this._mean_window.length > this._mean_window_size) {
+        this._mean_window.shift();
+    }
+}
+
+Fft.prototype._get_window_mean = function() {
+    var min_size = -1;
+    for (var i = 0; i < this._mean_window.length; i++) {
+        if (min_size == -1 || this._mean_window[i].length < min_size) {
+            min_size = this._mean_window[i].length;
+        }
+    }
+    mean = new Int8Array(min_size);
+    for (var x = 0; x < min_size; x++) {
+        var m = 0.0;
+        for (var i = 0; i < this._mean_window.length; i++) {
+            m = m + this._mean_window[i][x];
+        }
+        mean[x] = m / this._mean_window.length;
+    }
+    return mean;
+}
+
 Fft.prototype._update_sx = function(size) {
     if (size != this._current_fft_size) {
         this._sx = d3.scale.linear()
@@ -74,11 +101,13 @@ Fft.prototype.start = function() {
     this._ws.onmessage = function(evt) {
         if (evt.data instanceof ArrayBuffer) {
             fft = new Int8Array(evt.data);
+            self._push_data(fft);
+            mean = self._get_window_mean();
             if (self._rearrange_halves) {
-                fft = get_rearranged_fft(fft);
+                mean = get_rearranged_fft(mean);
             }
-            self._update_sx(fft.length);
-            self._fftpath.attr("d", self._fftline(fft));
+            self._update_sx(mean.length);
+            self._fftpath.attr("d", self._fftline(mean));
         }
     };
 }
