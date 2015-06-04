@@ -25,10 +25,8 @@
 </head>
 
 <body>
-  <h1>FFTs</h1>
-
   <form>
-    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val(), $('#fftwidth').val(), $('#fftheight').val(), $('#rearrange').is(':checked'), $('#meanwindow').val()) ; $('#udpport').val((parseInt($('#udpport').val())+1).toString())">New fft</button>
+    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val(), $('#fftwidth').val(), $('#fftheight').val(), $('#rearrange').is(':checked'), $('#meanwindow').val()) ; $('#udpport').val((parseInt($('#udpport').val())+1).toString())">New graph</button>
     host:<input type="text" id="host" value="localhost"/>
     port:<input type="text" id="port" value="80"/>
     UDP port:<input type="text" id="udpport" value="6663"/>
