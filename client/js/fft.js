@@ -119,3 +119,7 @@ Fft.prototype.stop = function() {
     clearInterval(this._keepalive);
     this._ws.close();
 }
+
+Fft.prototype.clear = function() {
+    this._fftpath.attr("d", null);
+}

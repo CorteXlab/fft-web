@@ -14,7 +14,8 @@
       fft_html = "<div id=\"" + fft_id + "_container\" style=\"float: left\">"
                + "<div id=\"" + fft_id + "\" style=\"border-color: black; border-style: solid; width: " + width + "px; height: " + height + "px\"></div>"
                + "<span title=\"" +host + ":" + port + " listening to FFT data on UDP port " + udpport + "\">" + udpport + "</span>"
-               + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].stop(); $('#" + fft_id + "_container').remove();\">close</button><br/>"
+               + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].stop(); $('#" + fft_id + "_container').remove();\">close</button>"
+               + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].clear();\">clear</button><br/>"
                + "</div>";
       fft_code = "ffts[fft_index] = new Fft(\"#" + fft_id + "\", \"" + host + "\", " + port +", " + udpport + ", " + rearrange + ", " + meanwindow + "); ffts[fft_index].start();";
       $(elem).append(fft_html);
