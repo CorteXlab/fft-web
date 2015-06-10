@@ -110,8 +110,12 @@ Fft.prototype.start = function() {
             self._fftpath.attr("d", self._fftline(mean));
         }
     };
+    this._keepalive = setInterval(function() {
+        self._ws.send("ping");
+    }, 60000);
 }
 
 Fft.prototype.stop = function() {
+    clearInterval(this._keepalive);
     this._ws.close();
 }
