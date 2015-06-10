@@ -8,11 +8,12 @@
   <script type="text/javascript">
     var fft_index = 0;
     var ffts = [];
-    function addfft(elem, host, port, udpport, width, height, rearrange, meanwindow) {
+    function addfft(elem, host, port, udpport, width, height, rearrange, meanwindow, title) {
       fft_index++;
       var fft_id = "fft" + fft_index;
-      fft_html = "<div id=\"" + fft_id + "_container\" style=\"float: left\">"
-               + "<div id=\"" + fft_id + "\" style=\"border-color: black; border-style: solid; width: " + width + "px; height: " + height + "px\"></div>"
+      fft_html = "<div id=\"" + fft_id + "_container\" style=\"float: left; border-color: black; border-style: solid; \">"
+               + "<div><b>" + title + "</b></div>"
+               + "<div id=\"" + fft_id + "\" style=\"width: " + width + "px; height: " + height + "px\"></div>"
                + "<span title=\"" +host + ":" + port + " listening to FFT data on UDP port " + udpport + "\">" + udpport + "</span>"
                + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].stop(); $('#" + fft_id + "_container').remove();\">close</button>"
                + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].clear();\">clear</button><br/>"
@@ -27,7 +28,7 @@
 
 <body>
   <form>
-    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val(), $('#fftwidth').val(), $('#fftheight').val(), $('#rearrange').is(':checked'), $('#meanwindow').val()) ; $('#udpport').val((parseInt($('#udpport').val())+1).toString())">New graph</button>
+    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val(), $('#fftwidth').val(), $('#fftheight').val(), $('#rearrange').is(':checked'), $('#meanwindow').val(), $('#title').val()) ; $('#udpport').val((parseInt($('#udpport').val())+1).toString())">New graph</button>
     host:<input type="text" id="host" value="localhost"/>
     port:<input type="text" id="port" value="80"/>
     UDP port:<input type="text" id="udpport" value="6663"/>
@@ -35,6 +36,7 @@
     height:<input type="text" id="fftheight" value="200"/>
     rearrange halves:<input type="checkbox" id="rearrange" checked="true"/>
     mean window:<input type="text" id="meanwindow" value="1"/>
+    title:<input type="text" id="title" value=""/>
   </form>
   <script type="text/javascript">
     $( document ).ready( function() { $('#host').val(location.host) });
