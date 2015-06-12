@@ -1,6 +1,6 @@
 function formatn(n) {
     if (n < 1e-3 || n > 1e4) {
-        return n.toExponential(parseFloat(n.toPrecision(3)));
+        return parseFloat(n.toPrecision(3)).toExponential();
     } else {
         return n.toPrecision(3);
     }
