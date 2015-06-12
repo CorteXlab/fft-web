@@ -1,10 +1,26 @@
-function Fft(elem, host, port, udpport, rearrange_halves, mean_window_size) {
+function formatn(n) {
+    if (n < 1e-3 || n > 1e4) {
+        return n.toExponential(parseFloat(n.toPrecision(3)));
+    } else {
+        return n.toPrecision(3);
+    }
+}
+
+function Fft(elem, host, port, udpport, rearrange_halves, mean_window_size, x_axis_min, x_axis_max, y_axis_min, y_axis_max) {
     this._host = host;
     this._port = port;
     this._udpport = udpport;
     this._rearrange_halves = rearrange_halves;
     this._mean_window_size = mean_window_size;
     this._mean_window = [];
+    this._x_min = undefined;
+    this._x_max = undefined;
+    this._x_axis_min = x_axis_min;
+    this._x_axis_max = x_axis_max;
+    this._y_min = undefined;
+    this._y_max = undefined;
+    this._y_axis_min = y_axis_min;
+    this._y_axis_max = y_axis_max;
     this._elem = d3.select(elem);
     this._total_width = $(elem).width();
     this._total_height = $(elem).height();
@@ -18,22 +34,13 @@ function Fft(elem, host, port, udpport, rearrange_halves, mean_window_size) {
         .attr("height", this._total_height)
         .append("g")
         .attr("transform", "translate(" + this._margin.left + "," + this._margin.top + ")");
-    this._current_fft_size = -1;
-    this._sx = null;
-    this._sy = d3.scale.linear()
-        .domain([-128,127])
-        .rangeRound([0, this._graph_height]);
-    this._yaxis = d3.svg.axis()
-        .scale(this._sy)
-        .tickValues([])
-        .tickFormat(function(d) { return (((d+128.0) / 256.0) * -100.0).toFixed(0); })
-        .orient("left");
     this._svgxaxis = this._chart.append("g")
-        .attr("class", "x axis")
+        .attr("class", "axis")
         .attr("transform", "translate(0," + this._graph_height + ")");
     this._svgyaxis = this._chart.append("g")
-        .attr("class", "y axis")
-        .call(this._yaxis);
+        .attr("class", "axis");
+    this._update_x_range(0,1024);
+    this._update_y_range(-128, 127);
     this._fftline = d3.svg.line()
         .x(function(d, i) { return this._sx(i); })
         .y(function(d) { return this._graph_height - this._sy(d); });
@@ -69,19 +76,58 @@ Fft.prototype._get_window_mean = function() {
     return mean;
 }
 
-Fft.prototype._update_sx = function(size) {
-    if (size != this._current_fft_size) {
+Fft.prototype._update_x_range = function(x_min, x_max) {
+    if (x_min != this._x_min || x_max != this._x_max) {
+        this._x_min = x_min;
+        this._x_max = x_max;
         this._sx = d3.scale.linear()
-            .domain([0, size])
+            .domain([x_min, x_max])
             .rangeRound([0, this._graph_width]);
-        this._xaxis = d3.svg.axis()
-            .scale(this._sx)
-            .tickValues([0, size/2, size])
-            .tickFormat(function(d) { return d - size/2; })
-            .orient("bottom");
-        this._svgxaxis.call(this._xaxis);
-        this._current_fft_size = size;
+        this.x_axis(this._x_axis_min, this._x_axis_max);
     }
+}
+
+Fft.prototype.x_axis = function(x_axis_min, x_axis_max) {
+    this._x_axis_min = x_axis_min;
+    this._x_axis_max = x_axis_max;
+    this._xaxis = d3.svg.axis()
+        .scale(this._sx)
+        .orient("bottom")
+        .tickValues([]);
+    if (this._x_axis_max - this._x_axis_min > 0 && this._x_max - this._x_min > 0) {
+        a = (this._x_axis_min - this._x_axis_max) / (this._x_min - this._x_max);
+        b = (this._x_axis_max * this._x_min - this._x_axis_min * this._x_max) / (this._x_min - this._x_max);
+        this._xaxis.tickValues([this._x_min, (this._x_max - this._x_min)/2, this._x_max])
+            .tickFormat(function(d) { return formatn(a * d + b); });
+    }
+    this._svgxaxis.call(this._xaxis);
+}
+
+Fft.prototype._update_y_range = function(y_min, y_max) {
+    if (y_min != this._y_min || y_max != this._y_max) {
+        this._y_min = y_min;
+        this._y_max = y_max;
+        this._sy = d3.scale.linear()
+            .domain([y_min, y_max])
+            .rangeRound([0, this._graph_height]);
+        this.y_axis(this._y_axis_min, this._y_axis_max);
+    }
+}
+
+Fft.prototype.y_axis = function(y_axis_min, y_axis_max) {
+    this._y_axis_min = y_axis_min;
+    this._y_axis_max = y_axis_max;
+    this._yaxis = d3.svg.axis()
+        .scale(this._sy)
+        .orient("left")
+        .tickValues([]);
+    if (this._y_axis_max - this._y_axis_min > 0 && this._y_max - this._y_min > 0) {
+        a = (this._y_axis_max - this._y_axis_min) / (this._y_min - this._y_max);
+        b = (this._y_axis_min * this._y_min - this._y_axis_max * this._y_max) / (this._y_min - this._y_max);
+        this._yaxis.tickValues([this._y_min, (this._y_max - this._y_min)/2, this._y_max])
+            .tickFormat(function(d) { return formatn(a * d + b); });
+    }
+    this._svgyaxis.call(this._yaxis);
 }
 
 function get_rearranged_fft(fft) {
@@ -106,7 +152,7 @@ Fft.prototype.start = function() {
             if (self._rearrange_halves) {
                 mean = get_rearranged_fft(mean);
             }
-            self._update_sx(mean.length);
+            self._update_x_range(0, mean.length);
             self._fftpath.attr("d", self._fftline(mean));
         }
     };

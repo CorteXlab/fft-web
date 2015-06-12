@@ -8,7 +8,7 @@
   <script type="text/javascript">
     var fft_index = 0;
     var ffts = [];
-    function addfft(elem, host, port, udpport, width, height, rearrange, meanwindow, title) {
+    function addfft(elem, host, port, udpport, width, height, rearrange, meanwindow, title, x_min, x_max, y_min, y_max) {
       fft_index++;
       var fft_id = "fft" + fft_index;
       fft_html = "<div id=\"" + fft_id + "_container\" style=\"float: left; border-color: black; border-style: solid; \">"
@@ -18,17 +18,25 @@
                + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].stop(); $('#" + fft_id + "_container').remove();\">close</button>"
                + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].clear();\">clear</button><br/>"
                + "</div>";
-      fft_code = "ffts[fft_index] = new Fft(\"#" + fft_id + "\", \"" + host + "\", " + port +", " + udpport + ", " + rearrange + ", " + meanwindow + "); ffts[fft_index].start();";
+      fft_code = "ffts[fft_index] = new Fft(\"#" + fft_id + "\", \"" + host + "\"," + port + "," + udpport + "," + rearrange + "," + meanwindow + "," + x_min + "," + x_max + "," + y_min + "," + y_max + "); ffts[fft_index].start();";
       $(elem).append(fft_html);
       eval(fft_code);
     }
   </script>
-
+  <style>
+    .axis text { font: 10px sans-serif; }
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+  </style>
 </head>
 
 <body>
   <form>
-    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val(), $('#fftwidth').val(), $('#fftheight').val(), $('#rearrange').is(':checked'), $('#meanwindow').val(), $('#title').val()) ; $('#udpport').val((parseInt($('#udpport').val())+1).toString())">New graph</button>
+    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val(), $('#fftwidth').val(), $('#fftheight').val(), $('#rearrange').is(':checked'), $('#meanwindow').val(), $('#title').val(), $('#x_min').val(), $('#x_max').val(), $('#y_min').val(), $('#y_max').val()) ; $('#udpport').val((parseInt($('#udpport').val())+1).toString())">New graph</button>
     host:<input type="text" id="host" value="localhost"/>
     port:<input type="text" id="port" value="80"/>
     UDP port:<input type="text" id="udpport" value="6663"/>
@@ -37,6 +45,10 @@
     rearrange halves:<input type="checkbox" id="rearrange" checked="true"/>
     mean window:<input type="text" id="meanwindow" value="1"/>
     title:<input type="text" id="title" value=""/>
+    x_min:<input type="text" id="x_min" value="0"/>
+    x_max:<input type="text" id="x_max" value="0"/>
+    y_min:<input type="text" id="y_min" value="0"/>
+    y_max:<input type="text" id="y_max" value="0"/>
   </form>
   <script type="text/javascript">
     $( document ).ready( function() { $('#host').val(location.host) });
