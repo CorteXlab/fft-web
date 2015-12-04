@@ -1,0 +1,45 @@
+Frame format:
+-------------
+
+
+...........................................................................
+length     | description
+(in bytes) |
+...........................................................................
+8          | magic header, string = "OrbtCrtx"
+4          | frame size, of the whole frame, including all headers and data
+1          | type of data
+...........................................................................
+
+
+
+type of data is enum:
+---------------------
+
+0 - graph metadata:
+
+  x axis low float (4 bytes)
+
+  x axis high float (4 bytes)
+
+  y axis low float (4 bytes)
+
+  y axis high float (4 bytes)
+
+  null terminated x axis label (c string). encoding iso8859-15
+
+  null terminated y axis label (c string). encoding iso8859-15
+
+  null terminated graph label (c string). encoding iso8859-15
+
+1 - fft as bytes not rearranged (linear rescaling)
+
+2 - fft as bytes rearranged (linear rescaling) (same as 5)
+
+3 - fft as float not rearranged (actual values)
+
+4 - fft as flots rearranged (actual values) (same as 6)
+
+5 - time samples as bytes (linear rescaling)
+
+6 - time samples as floats (actual values)
