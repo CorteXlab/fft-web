@@ -13,12 +13,12 @@
       var fft_id = "fft" + fft_index;
       fft_html = "<div id=\"" + fft_id + "_container\" style=\"float: left; border-color: black; border-style: solid; \">"
                + "<div><b>" + title + "</b></div>"
-               + "<div id=\"" + fft_id + "\" style=\"width: " + width + "px; height: " + height + "px\"></div>"
-               + "<span title=\"" +host + ":" + port + " listening to FFT data on UDP port " + udpport + "\">" + udpport + "</span>"
-               + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].stop(); $('#" + fft_id + "_container').remove();\">close</button>"
+               + "<div id=\"" + fft_id + "\" style=\"width: " + (width?width:640) + "px; height: " + (height?height:200) + "px\"></div>"
+               + "<span title=\"" + host + ":" + port + " listening to FFT data on UDP port " + udpport + "\">" + udpport + "</span>"
+               + " <button type=\"button\" onclick=\"try { ffts["+ fft_index + "].stop(); } finally { $('#" + fft_id + "_container').remove(); }\">close</button>"
                + " <button type=\"button\" onclick=\"ffts["+ fft_index + "].clear();\">clear</button><br/>"
                + "</div>";
-      fft_code = "ffts[fft_index] = new Fft(\"#" + fft_id + "\", \"" + host + "\"," + port + "," + udpport + "," + rearrange + "," + meanwindow + "," + x_min + "," + x_max + "," + y_min + "," + y_max + "); ffts[fft_index].start();";
+      fft_code = "ffts[fft_index] = new Fft(\"#" + fft_id + "\", \"" + (host?host:"xp.cortexlab.fr") + "\"," + (port?port:"80") + "," + (udpport?udpport:"6663") + "," + rearrange + "," + (meanwindow?meanwindow:"1") + "," + (x_min?x_min:"0") + "," + (x_max?x_max:"0") + "," + (y_min?y_min:"0") + "," + (y_max?y_max:"0") + "); ffts[fft_index].start();";
       $(elem).append(fft_html);
       eval(fft_code);
     }
@@ -36,7 +36,7 @@
 
 <body>
   <form>
-    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val(), $('#fftwidth').val(), $('#fftheight').val(), $('#rearrange').is(':checked'), $('#meanwindow').val(), $('#title').val(), $('#x_min').val(), $('#x_max').val(), $('#y_min').val(), $('#y_max').val()) ; $('#udpport').val((parseInt($('#udpport').val())+1).toString())">New graph</button>
+    <button type="button" onclick="addfft('body', $('#host').val(), $('#port').val(), $('#udpport').val(), $('#fftwidth').val(), $('#fftheight').val(), $('#rearrange').is(':checked'), $('#meanwindow').val(), $('#title').val(), $('#x_min').val(), $('#x_max').val(), $('#y_min').val(), $('#y_max').val()) ; $('#udpport').val((isNaN(parseInt($('#udpport').val()))?6663:parseInt($('#udpport').val())+1).toString())">New graph</button>
     host:<input type="text" id="host" value="localhost"/>
     port:<input type="text" id="port" value="80"/>
     UDP port:<input type="text" id="udpport" value="6663"/>
